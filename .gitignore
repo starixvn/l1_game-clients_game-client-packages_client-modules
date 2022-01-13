@@ -73,3 +73,5 @@ quick_gen_project_*_autogen.sh.meta
 assets/resources/i18n.meta
 node_modules
 !.vscode/settings.json
+
+test-report.xml
