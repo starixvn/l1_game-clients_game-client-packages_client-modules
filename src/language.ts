@@ -1,5 +1,6 @@
 import { getSession, setSession } from "./session";
 
+// NOSONAR
 const i18n = require("LanguageData");
 const defaultLanguage = "en-US";
 
@@ -17,7 +18,7 @@ declare global {
 export function isLanguageSupported(language: string) {
   const languages = getLanguages();
 
-  return language && languages.filter((lang) => lang.code == language).length != 0;
+  return language && languages.filter((lang) => lang.code === language).length !== 0;
 }
 
 export function getLanguages() {
