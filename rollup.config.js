@@ -8,7 +8,7 @@ const banner = `/*!
  */`;
 
 module.exports = {
-  input: "./build/umd/index.js",
+  input: "./build/umd/modules.js",
   output: [
     {
       file: "./build/modules.js",

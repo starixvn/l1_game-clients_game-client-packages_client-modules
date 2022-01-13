@@ -1,13 +1,25 @@
-const SESSION_KEY = "session";
+const sessionKey = `${window.location.hostname}.scss`;
 
-export function getSession() {
-  return localStorage.getItem(SESSION_KEY) || "";
+export interface Session {
+  username: string;
+  language: string;
+  session: string;
+  currency: string;
+  expiredIn: Date;
+  isAuthenticated: boolean;
+  ss?: string;
 }
 
-export function setSession(session: string) {
-  localStorage.setItem(SESSION_KEY, session);
+export function getSession(): Session {
+  return JSON.parse(localStorage.getItem(sessionKey) || "{}");
+}
+
+export function setSession(session: Session) {
+  session.ss = session.session;
+
+  localStorage.setItem(sessionKey, JSON.stringify(session));
 }
 
 export function removeSession() {
-  localStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem(sessionKey);
 }

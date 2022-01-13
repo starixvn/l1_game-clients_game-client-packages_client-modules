@@ -1,5 +1,5 @@
 /*!
- * Nex3 Client Modules v1.0.7
+ * Nex3 Client Modules v1.0.11
  */
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
@@ -16,47 +16,70 @@
     }, _typeof(obj);
   }
 
+  var __createBinding = undefined && undefined.__createBinding || (Object.create ? function (o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    });
+  } : function (o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+  });
+
+  var __setModuleDefault = undefined && undefined.__setModuleDefault || (Object.create ? function (o, v) {
+    Object.defineProperty(o, "default", {
+      enumerable: true,
+      value: v
+    });
+  } : function (o, v) {
+    o["default"] = v;
+  });
+
+  var __importStar = undefined && undefined.__importStar || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) {
+      if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    }
+
+    __setModuleDefault(result, mod);
+
+    return result;
+  };
+
   (function (factory) {
     if ((typeof module === "undefined" ? "undefined" : _typeof(module)) === "object" && _typeof(module.exports) === "object") {
       var v = factory(require, exports);
       if (v !== undefined) module.exports = v;
     } else if (typeof define === "function" && define.amd) {
-      define(["require", "exports", "mobx", "mobx-cocos", "./connections", "./session", "./configs", "./language"], factory);
+      define(["require", "exports", "./connections", "./session", "mobx", "mobx-cocos", "./configs", "./language"], factory);
     }
   })(function (require, exports) {
 
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports.legacyModules = void 0;
-
-    var Mobx = require("mobx");
-
-    var MobxCocos = require("mobx-cocos");
+    exports.connections = exports.languages = exports.configs = exports.mobxCocos = exports.mobx = void 0;
 
     var connections_1 = require("./connections");
 
     var session_1 = require("./session");
 
-    var Configs = require("./configs");
-
-    var Languages = require("./language");
-
-    exports.legacyModules = {
-      mobx: Mobx,
-      mobxCocos: MobxCocos,
-      connections: {
-        Connection: connections_1.SocketIOConnection,
-        getConnection: connections_1.makeConnectionGetter(),
-        getSession: session_1.getSession,
-        setSession: session_1.setSession,
-        removeSession: session_1.removeSession,
-        sso: connections_1.sso
-      },
-      configs: Configs,
-      languages: Languages
+    exports.mobx = __importStar(require("mobx"));
+    exports.mobxCocos = __importStar(require("mobx-cocos"));
+    exports.configs = __importStar(require("./configs"));
+    exports.languages = __importStar(require("./language"));
+    exports.connections = {
+      SocketIOConnection: connections_1.SocketIOConnection,
+      getConnection: connections_1.getConnection,
+      sso: connections_1.sso,
+      getSession: session_1.getSession,
+      setSession: session_1.setSession,
+      removeSession: session_1.removeSession
     };
-    exports["default"] = exports.legacyModules;
   });
 
 }));

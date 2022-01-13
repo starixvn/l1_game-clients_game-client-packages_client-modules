@@ -1,40 +1,48 @@
+import { getSession, setSession } from "./session";
+
 const i18n = require("LanguageData");
-const LANGUAGE_KEY = "language";
-const DEFAULT_LANGUAGE = "en-US";
+const defaultLanguage = "en-US";
 
 declare global {
+  interface GlobalConfigs {
+    supportedLanguages?: { code: string; text: string }[];
+    defaultLanguage?: string;
+  }
   export interface Window {
     language: string;
+    globalConfigs: GlobalConfigs;
   }
 }
 
 export function isLanguageSupported(language: string) {
   const languages = getLanguages();
 
-  return language && languages.filter((name) => name == language).length != 0;
+  return language && languages.filter((lang) => lang.code == language).length != 0;
 }
 
 export function getLanguages() {
-  return ["en-US", "id-ID", "th-TH"];
+  return window.globalConfigs?.supportedLanguages || [];
 }
 
 export function getLanguage() {
-  const currentLanguage = localStorage.getItem(LANGUAGE_KEY);
-  const isLanguageValid = isLanguageSupported(currentLanguage);
+  const session = getSession();
+  const isLanguageValid = isLanguageSupported(session?.language);
 
-  return isLanguageValid ? currentLanguage : getDefaultLanguage();
+  return isLanguageValid ? session.language : getDefaultLanguage();
 }
 
 export function getDefaultLanguage() {
-  return DEFAULT_LANGUAGE;
+  return window.globalConfigs?.defaultLanguage || defaultLanguage;
 }
 
 export function setLanguage(language: string) {
+  const session = getSession();
   const isLanguageValid = isLanguageSupported(language);
-  const validatedLanguage = isLanguageValid ? language : getLanguage();
+  const validatedLanguage = isLanguageValid ? language : getDefaultLanguage();
 
-  localStorage.setItem(LANGUAGE_KEY, validatedLanguage);
+  session.language = validatedLanguage;
 
+  setSession(session);
   i18n.init(validatedLanguage);
   i18n.updateSceneRenderers();
 }
