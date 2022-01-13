@@ -1,4 +1,4 @@
-import { getRateConfig } from "../lib/configs";
+import { getRateConfig } from "../src/configs";
 
 describe("configs", () => {
   describe("getRateConfig", () => {

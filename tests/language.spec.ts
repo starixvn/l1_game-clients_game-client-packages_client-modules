@@ -1,7 +1,7 @@
-import * as sessionManager from "../lib/session";
+import * as sessionManager from "../src/session";
 import i18n from "./mocks/language-data-mock";
 
-jest.mock("../lib/session");
+jest.mock("../src/session");
 
 const sessionManagerMock: jest.Mocked<typeof sessionManager> = sessionManager as any;
 
@@ -11,7 +11,7 @@ import {
   getDefaultLanguage,
   getLanguage,
   setLanguage,
-} from "../lib/language";
+} from "../src/language";
 
 describe("language", () => {
   describe("getLanguages", () => {

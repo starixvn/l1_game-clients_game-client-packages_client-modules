@@ -8,5 +8,5 @@
     "allowJs": true,
     "esModuleInterop": true
   },
-  "include": ["./lib/**/*"]
+  "include": ["src/**/*"]
 }

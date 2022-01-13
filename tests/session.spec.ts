@@ -1,4 +1,4 @@
-import { getSession, removeSession, setSession } from "../lib/session";
+import { getSession, removeSession, setSession } from "../src/session";
 
 const localStorageMock = {
   getItem: jest.fn(),
