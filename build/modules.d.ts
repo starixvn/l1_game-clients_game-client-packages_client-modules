@@ -49,8 +49,8 @@ declare global {
 		globalConfigs: GlobalConfigs;
 	}
 	export interface GlobalConfigs {
-		environment: Environment;
-		games: Record<string, GameConfigs>;
+		environment?: Environment;
+		games?: Record<string, GameConfigs>;
 	}
 	export interface Environment {
 		ssl: boolean;

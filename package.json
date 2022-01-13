@@ -7,7 +7,6 @@
   "main": "./build/modules.js",
   "types": "./build/modules.d.ts",
   "scripts": {
-    "pretest": "npm run build",
     "test": "jest",
     "test-coverage": "jest --coverage",
     "build": "rimraf ./build && tsc && rollup -c && rimraf build/umd && yarn dts",
@@ -59,7 +58,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn test",
+      "pre-push": "yarn build && yarn test",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
