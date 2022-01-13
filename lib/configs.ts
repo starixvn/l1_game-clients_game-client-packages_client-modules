@@ -7,8 +7,8 @@ declare global {
   }
 
   export interface GlobalConfigs {
-    environment: Environment;
-    games: Record<string, GameConfigs>;
+    environment?: Environment;
+    games?: Record<string, GameConfigs>;
   }
 
   export interface Environment {
