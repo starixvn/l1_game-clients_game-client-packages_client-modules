@@ -3023,14 +3023,6 @@ dot-prop@^5.1.0:
   dependencies:
     is-obj "^2.0.0"
 
-dts-bundle-generator@^6.4.0:
-  version "6.4.0"
-  resolved "https://npm.lumigame.com/dts-bundle-generator/-/dts-bundle-generator-6.4.0.tgz#be18adeb4340153ca316938c99e1b1e74edd59db"
-  integrity sha512-hKktZs5tXUAMlZX5Ae3ArI2HFR2ISLrDzvbBBSy5dI7mZMaJztsX2hA0rgkcMqzvkjOezen7x1GUYQwad2wAqQ==
-  dependencies:
-    typescript ">=3.0.1"
-    yargs "^17.2.1"
-
 duplexer2@~0.1.0:
   version "0.1.4"
   resolved "https://npm.lumigame.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"
@@ -7066,7 +7058,7 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@>=3.0.1, typescript@^4.1.3:
+typescript@^4.1.3:
   version "4.5.4"
   resolved "https://npm.lumigame.com/typescript/-/typescript-4.5.4.tgz#a17d3a0263bf5c8723b9c52f43c5084edf13c2e8"
   integrity sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==
@@ -7417,11 +7409,6 @@ yargs-parser@^18.1.2:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs-parser@^21.0.0:
-  version "21.0.0"
-  resolved "https://npm.lumigame.com/yargs-parser/-/yargs-parser-21.0.0.tgz#a485d3966be4317426dd56bdb6a30131b281dc55"
-  integrity sha512-z9kApYUOCwoeZ78rfRYYWdiU/iNL6mwwYlkkZfJoyMR1xps+NEBX5X7XmRpxkZHhXJ6+Ey00IwKxBBSW9FIjyA==
-
 yargs@^15.1.0:
   version "15.4.1"
   resolved "https://npm.lumigame.com/yargs/-/yargs-15.4.1.tgz#0d87a16de01aee9d8bec2bfbf74f67851730f4f8"
@@ -7451,19 +7438,6 @@ yargs@^16.2.0:
     string-width "^4.2.0"
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
-
-yargs@^17.2.1:
-  version "17.3.1"
-  resolved "https://npm.lumigame.com/yargs/-/yargs-17.3.1.tgz#da56b28f32e2fd45aefb402ed9c26f42be4c07b9"
-  integrity sha512-WUANQeVgjLbNsEmGk20f+nlHgOqzRFpiGWVaBrYGYIGANIIu3lWjoyi0fNlFmJkvfhCZ6BXINe7/W2O2bV4iaA==
-  dependencies:
-    cliui "^7.0.2"
-    escalade "^3.1.1"
-    get-caller-file "^2.0.5"
-    require-directory "^2.1.1"
-    string-width "^4.2.3"
-    y18n "^5.0.5"
-    yargs-parser "^21.0.0"
 
 yeast@0.1.2:
   version "0.1.2"

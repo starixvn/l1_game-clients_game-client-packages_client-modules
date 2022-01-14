@@ -1,16 +1,15 @@
 {
   "name": "@nex3/client-modules",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "files": [
     "build/"
   ],
   "main": "./build/modules.js",
-  "types": "./build/modules.d.ts",
+  "types": "./build/umd/modules.d.ts",
   "scripts": {
     "test": "jest",
     "test-coverage": "jest --coverage",
-    "build": "rimraf ./build && tsc && rollup -c && rimraf build/umd && yarn dts",
-    "dts": "dts-bundle-generator -o build/modules.d.ts src/modules.ts --umd-module-name modules --export-referenced-types --no-banner --inline-declare-global",
+    "build": "rimraf ./build && tsc && rollup -c",
     "reg": "npm set registry http://npm.lumigame.com",
     "semantic-release": "semantic-release",
     "version:patch": "npm version patch",
@@ -35,7 +34,6 @@
     "@semantic-release/release-notes-generator": "^9.0.1",
     "@types/jest": "^27.4.0",
     "@types/socket.io-client": "^3.0.0",
-    "dts-bundle-generator": "^6.4.0",
     "husky": "^4.2.5",
     "jest": "^27.4.7",
     "jest-extended": "^1.2.0",
