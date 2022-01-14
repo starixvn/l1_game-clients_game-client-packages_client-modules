@@ -1,6 +1,6 @@
 import { getSession, setSession } from "./session";
+import { getI18NInstance } from "./utils";
 
-const i18n = require("LanguageData"); // NOSONAR
 const defaultLanguage = "en-US";
 
 declare global {
@@ -39,6 +39,7 @@ export function setLanguage(language: string) {
   const session = getSession();
   const isLanguageValid = isLanguageSupported(language);
   const validatedLanguage = isLanguageValid ? language : getDefaultLanguage();
+  const i18n = getI18NInstance();
 
   session.language = validatedLanguage;
 
