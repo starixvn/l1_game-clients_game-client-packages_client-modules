@@ -1,7 +1,6 @@
 import { getSession, setSession } from "./session";
 
-// NOSONAR
-const i18n = require("LanguageData");
+const i18n = require("LanguageData"); // NOSONAR
 const defaultLanguage = "en-US";
 
 declare global {

@@ -16,20 +16,25 @@ import {
 describe("language", () => {
   describe("getLanguages", () => {
     it("when global variable is not defined should return an empty array", () => {
+      // Act
       const languages = getLanguages();
 
+      // Assert
       expect(languages).toHaveLength(0);
     });
 
     it("return defined global variable", () => {
+      // Arrange
       const supportedLanguages = [{ code: "en-US", text: "English" }];
 
       window.globalConfigs = {
         supportedLanguages,
       };
 
+      // Act
       const languages = getLanguages();
 
+      // Assert
       expect(languages).toStrictEqual(supportedLanguages);
     });
   });
@@ -46,45 +51,59 @@ describe("language", () => {
     test.each([null, ""])(
       "when argument is empty or null should return false",
       (language: string) => {
+        // Act
         const isSupported = isLanguageSupported(language);
 
+        // Assert
         expect(isSupported).toBeFalsy();
       }
     );
 
     it("when not found any language in the array should return false", () => {
+      // Act
       const isSupported = isLanguageSupported("vi-VN");
 
+      // Assert
       expect(isSupported).toBeFalsy();
     });
 
     it("when found the language in the array should return true", () => {
+      // Act
       const isSupported = isLanguageSupported("en-US");
 
+      // Assert
       expect(isSupported).toBeTruthy();
     });
   });
 
   describe("getDefaultLanguage", () => {
     it("when the global variable is not defined should return 'en-US'", () => {
+      // Act
       const language = getDefaultLanguage();
 
+      // Assert
       expect(language).toBe("en-US");
     });
 
     it("when the global variable is defined should return it", () => {
+      // Arrange
       window.globalConfigs = { defaultLanguage: "vi-VN" };
 
+      // Act
       const language = getDefaultLanguage();
 
+      // Assert
       expect(language).toBe("vi-VN");
     });
 
     it("when the global variable is null should return 'en-US'", () => {
+      // Arrange
       window.globalConfigs = null;
 
+      // Act
       const language = getDefaultLanguage();
 
+      // Assert
       expect(language).toBe("en-US");
     });
   });
@@ -95,13 +114,16 @@ describe("language", () => {
     });
 
     it("when session is null should return default language", () => {
+      // Act
       const language = getLanguage();
 
+      // Assert
       expect(language).toBe("en-US");
       expect(sessionManager.getSession).toBeCalled();
     });
 
     it("when the language in session is not supported should return default language", () => {
+      // Arrange
       const supportedLanguages = [{ code: "th-TH", text: "Thailand" }];
 
       window.globalConfigs = {
@@ -109,13 +131,16 @@ describe("language", () => {
         defaultLanguage: "th-TH",
       };
 
+      // Act
       const language = getLanguage();
 
+      // Assert
       expect(language).toBe("th-TH");
       expect(sessionManager.getSession).toBeCalled();
     });
 
     it("should return language", () => {
+      // Arrange
       sessionManagerMock.getSession.mockReturnValue({
         language: "th-TH",
         currency: "TH",
@@ -130,8 +155,10 @@ describe("language", () => {
         supportedLanguages,
       };
 
+      // Act
       const language = getLanguage();
 
+      // Assert
       expect(language).toBe("th-TH");
       expect(sessionManager.getSession).toBeCalled();
     });
@@ -155,24 +182,30 @@ describe("language", () => {
     });
 
     it("when the language is not supported should use default language", () => {
+      // Arrange
       sessionManagerMock.setSession.mockImplementationOnce((session: sessionManager.Session) => {
         expect(session.language).toBe("en-US");
       });
 
+      // Act
       setLanguage("vi-VN");
 
+      // Assert
       expect(i18n.init).toBeCalled();
       expect(i18n.updateSceneRenderers).toBeCalled();
       expect(sessionManager.setSession).toBeCalled();
     });
 
     it("should change the language", () => {
+      // Arrange
       sessionManagerMock.setSession.mockImplementationOnce((session: sessionManager.Session) => {
         expect(session.language).toBe("th-TH");
       });
 
+      // Act
       setLanguage("th-TH");
 
+      // Assert
       expect(i18n.init).toBeCalled();
       expect(i18n.updateSceneRenderers).toBeCalled();
       expect(sessionManager.setSession).toBeCalled();

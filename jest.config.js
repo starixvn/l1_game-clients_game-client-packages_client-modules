@@ -7,7 +7,7 @@ module.exports = {
   reporters: ["default", ["jest-junit", { outputDirectory: "coverage" }]],
   coverageReporters: ["clover", "lcov", "text-summary", "cobertura"],
   coverageDirectory: "coverage",
-  collectCoverageFrom: ["lib/**/*.(t|j)s"],
+  collectCoverageFrom: ["src/**/*.(t|j)s"],
   testEnvironment: "jsdom",
   moduleNameMapper: {
     "^LanguageData$": "<rootDir>/tests/mocks/language-data-mock.js",
