@@ -10,12 +10,12 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.setLanguage = exports.getDefaultLanguage = exports.getLanguage = exports.getLanguages = exports.isLanguageSupported = void 0;
-    const session_1 = require("./session");
-    const utils_1 = require("./utils");
-    const defaultLanguage = "en-US";
+    var session_1 = require("./session");
+    var utils_1 = require("./utils");
+    var defaultLanguage = "en-US";
     function isLanguageSupported(language) {
-        const languages = getLanguages();
-        return language && languages.filter((lang) => lang.code === language).length !== 0;
+        var languages = getLanguages();
+        return language && languages.filter(function (lang) { return lang.code === language; }).length !== 0;
     }
     exports.isLanguageSupported = isLanguageSupported;
     function getLanguages() {
@@ -24,8 +24,8 @@
     }
     exports.getLanguages = getLanguages;
     function getLanguage() {
-        const session = (0, session_1.getSession)();
-        const isLanguageValid = isLanguageSupported(session === null || session === void 0 ? void 0 : session.language);
+        var session = (0, session_1.getSession)();
+        var isLanguageValid = isLanguageSupported(session === null || session === void 0 ? void 0 : session.language);
         return isLanguageValid ? session.language : getDefaultLanguage();
     }
     exports.getLanguage = getLanguage;
@@ -35,10 +35,10 @@
     }
     exports.getDefaultLanguage = getDefaultLanguage;
     function setLanguage(language) {
-        const session = (0, session_1.getSession)();
-        const isLanguageValid = isLanguageSupported(language);
-        const validatedLanguage = isLanguageValid ? language : getDefaultLanguage();
-        const i18n = (0, utils_1.getI18NInstance)();
+        var session = (0, session_1.getSession)();
+        var isLanguageValid = isLanguageSupported(language);
+        var validatedLanguage = isLanguageValid ? language : getDefaultLanguage();
+        var i18n = (0, utils_1.getI18NInstance)();
         session.language = validatedLanguage;
         (0, session_1.setSession)(session);
         i18n.init(validatedLanguage);

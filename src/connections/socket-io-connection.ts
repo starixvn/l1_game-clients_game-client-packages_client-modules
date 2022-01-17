@@ -1,4 +1,4 @@
-import * as SocketIOClient from "socket.io-client";
+import SocketIOClient from "socket.io-client";
 import { getSession } from "../session";
 import { Connection } from "./connection";
 import { removeConnection } from "./connection-manager";

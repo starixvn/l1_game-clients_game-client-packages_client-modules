@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.removeSession = exports.setSession = exports.getSession = void 0;
-    const sessionKey = `${window.location.hostname}.scss`;
+    var sessionKey = "".concat(window.location.hostname, ".scss");
     function getSession() {
         return JSON.parse(localStorage.getItem(sessionKey) || "{}");
     }

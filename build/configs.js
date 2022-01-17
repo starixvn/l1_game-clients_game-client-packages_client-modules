@@ -17,7 +17,7 @@
     exports.getRateConfig = getRateConfig;
     function getEnvironmentConfigs() {
         var _a;
-        const defaultEnvironment = {
+        var defaultEnvironment = {
             gameUserUrl: "",
             hostName: "",
             ssl: false,
@@ -32,16 +32,16 @@
     }
     exports.getGameConfigs = getGameConfigs;
     function getGameServerUrl(game) {
-        const { hostName, ssl } = getEnvironmentConfigs();
-        const protocol = ssl ? "https" : "http";
-        const { namespace } = getGameConfigs(game) || { namespace: "" };
-        return `${protocol}://${hostName}${namespace}`;
+        var _a = getEnvironmentConfigs(), hostName = _a.hostName, ssl = _a.ssl;
+        var protocol = ssl ? "https" : "http";
+        var namespace = (getGameConfigs(game) || { namespace: "" }).namespace;
+        return "".concat(protocol, "://").concat(hostName).concat(namespace);
     }
     exports.getGameServerUrl = getGameServerUrl;
     function getProxyRoute(game) {
-        const { subpath } = getEnvironmentConfigs();
-        const { proxyRoute } = getGameConfigs(game);
-        return `${subpath}${proxyRoute}`;
+        var subpath = getEnvironmentConfigs().subpath;
+        var proxyRoute = getGameConfigs(game).proxyRoute;
+        return "".concat(subpath).concat(proxyRoute);
     }
     exports.getProxyRoute = getProxyRoute;
     function getGameUserUrl() {
