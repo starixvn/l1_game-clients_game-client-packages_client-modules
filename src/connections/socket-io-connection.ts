@@ -55,11 +55,7 @@ export class SocketIOConnection extends Connection {
   }
 
   emit(eventName: string, ...args: any[]) {
-    if (args.length) {
-      this.socket.emit(eventName, ...args);
-    } else {
-      this.socket.emit(eventName);
-    }
+    this.socket.emit(eventName, ...args);
   }
 
   private registerEvents() {

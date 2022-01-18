@@ -15,10 +15,38 @@ export function getConnection(game: string): Connection {
 
 export function removeConnection(game: string) {
   const connection = connections[game];
+
   if (connection) {
     connection.connected && connection.close();
 
     delete connections[game];
+  }
+}
+
+/**
+ * Use for testing and development
+ */
+export async function refreshSession(userSiteUrl: string, onError: Function) {
+  try {
+    const session = getSession();
+
+    if (session?.isAuthenticated) {
+      const userClient = UserClient({ serverUrl: userSiteUrl, token: session.session });
+
+      const result = await userClient.sessionManager.updateSessionTimeout({
+        ...session,
+        onError,
+        onUnsuccessful: onError,
+      });
+
+      if (result && result.isSuccessful) {
+        const newSession = Object.assign({}, session, { expiredIn: result.expiredIn });
+
+        setSession(newSession);
+      }
+    }
+  } catch (error) {
+    onError(error);
   }
 }
 
@@ -33,36 +61,15 @@ export async function sso(userSiteUrl: string, token: string): Promise<void> {
     const userClient = UserClient({ serverUrl: userSiteUrl, token: session.session });
     const userInfo = await userClient.sessionManager.sso({ token });
 
-    if (userInfo && userInfo.isAuthenticated) {
+    if (userInfo?.isAuthenticated) {
       setSession(userInfo);
     } else {
       removeSession();
     }
   }
 
-  async function refreshSession(onError: Function) {
-    try {
-      const session = getSession();
-
-      if (session && session.isAuthenticated) {
-        const userClient = UserClient({ serverUrl: userSiteUrl, token: session.session });
-
-        const result = await userClient.sessionManager.updateSessionTimeout({
-          ...session,
-          onError,
-          onUnsuccessful: onError,
-        });
-
-        if (result && result.isSuccessful) {
-          const newSession = Object.assign({}, session, { expiredIn: result.expiredIn });
-
-          setSession(newSession);
-        }
-      }
-    } catch (error) {
-      onError(error);
-    }
-  }
-
-  const interval = setInterval(() => refreshSession(() => clearInterval(interval)), 60000);
+  const interval = setInterval(
+    () => refreshSession(userSiteUrl, () => clearInterval(interval)),
+    60000
+  );
 }

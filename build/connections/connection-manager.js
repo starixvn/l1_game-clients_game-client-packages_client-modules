@@ -56,7 +56,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.sso = exports.removeConnection = exports.getConnection = void 0;
+    exports.sso = exports.refreshSession = exports.removeConnection = exports.getConnection = void 0;
     var socket_io_connection_1 = require("./socket-io-connection");
     var session_1 = require("../session");
     var user_client_1 = require("@nex3/user-client");
@@ -78,39 +78,43 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     exports.removeConnection = removeConnection;
     /**
      * Use for testing and development
+     */
+    function refreshSession(userSiteUrl, onError) {
+        return __awaiter(this, void 0, void 0, function () {
+            var session, userClient, result, newSession, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        session = (0, session_1.getSession)();
+                        if (!(session === null || session === void 0 ? void 0 : session.isAuthenticated)) return [3 /*break*/, 2];
+                        userClient = (0, user_client_1.UserClient)({ serverUrl: userSiteUrl, token: session.session });
+                        return [4 /*yield*/, userClient.sessionManager.updateSessionTimeout(__assign(__assign({}, session), { onError: onError, onUnsuccessful: onError }))];
+                    case 1:
+                        result = _a.sent();
+                        if (result && result.isSuccessful) {
+                            newSession = Object.assign({}, session, { expiredIn: result.expiredIn });
+                            (0, session_1.setSession)(newSession);
+                        }
+                        _a.label = 2;
+                    case 2: return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _a.sent();
+                        onError(error_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    }
+    exports.refreshSession = refreshSession;
+    /**
+     * Use for testing and development
      * @param userSiteUrl User site url
      * @param token
      */
     function sso(userSiteUrl, token) {
         return __awaiter(this, void 0, void 0, function () {
-            function refreshSession(onError) {
-                return __awaiter(this, void 0, void 0, function () {
-                    var session, userClient, result, newSession, error_1;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0:
-                                _a.trys.push([0, 3, , 4]);
-                                session = (0, session_1.getSession)();
-                                if (!(session && session.isAuthenticated)) return [3 /*break*/, 2];
-                                userClient = (0, user_client_1.UserClient)({ serverUrl: userSiteUrl, token: session.session });
-                                return [4 /*yield*/, userClient.sessionManager.updateSessionTimeout(__assign(__assign({}, session), { onError: onError, onUnsuccessful: onError }))];
-                            case 1:
-                                result = _a.sent();
-                                if (result && result.isSuccessful) {
-                                    newSession = Object.assign({}, session, { expiredIn: result.expiredIn });
-                                    (0, session_1.setSession)(newSession);
-                                }
-                                _a.label = 2;
-                            case 2: return [3 /*break*/, 4];
-                            case 3:
-                                error_1 = _a.sent();
-                                onError(error_1);
-                                return [3 /*break*/, 4];
-                            case 4: return [2 /*return*/];
-                        }
-                    });
-                });
-            }
             var session, userClient, userInfo, interval;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -121,7 +125,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         return [4 /*yield*/, userClient.sessionManager.sso({ token: token })];
                     case 1:
                         userInfo = _a.sent();
-                        if (userInfo && userInfo.isAuthenticated) {
+                        if (userInfo === null || userInfo === void 0 ? void 0 : userInfo.isAuthenticated) {
                             (0, session_1.setSession)(userInfo);
                         }
                         else {
@@ -129,7 +133,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         }
                         _a.label = 2;
                     case 2:
-                        interval = setInterval(function () { return refreshSession(function () { return clearInterval(interval); }); }, 60000);
+                        interval = setInterval(function () { return refreshSession(userSiteUrl, function () { return clearInterval(interval); }); }, 60000);
                         return [2 /*return*/];
                 }
             });

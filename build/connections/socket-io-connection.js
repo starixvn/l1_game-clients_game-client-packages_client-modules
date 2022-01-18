@@ -90,12 +90,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
-            if (args.length) {
-                (_a = this.socket).emit.apply(_a, __spreadArray([eventName], args, false));
-            }
-            else {
-                this.socket.emit(eventName);
-            }
+            (_a = this.socket).emit.apply(_a, __spreadArray([eventName], args, false));
         };
         SocketIOConnection.prototype.registerEvents = function () {
             var connectEvent = "connect";
