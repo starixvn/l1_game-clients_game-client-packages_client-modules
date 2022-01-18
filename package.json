@@ -1,13 +1,15 @@
 {
   "name": "@nex3/client-modules",
-  "version": "1.0.19",
+  "version": "1.0.24",
   "files": [
     "build/",
-    "types/"
+    "types/",
+    "install-types.js"
   ],
   "main": "./build/modules.js",
   "types": "./build/modules.d.ts",
   "scripts": {
+    "install": "node install-types.js",
     "test": "jest",
     "test-coverage": "jest --coverage",
     "build": "rimraf ./build && tsc",
