@@ -1,11 +1,24 @@
+variables:
+  PROJECT_NAME: l3-client-modules
+
 stages:
   - test
+  - post-test
   - publish
 
 include:
   - project: "ci/common-ci"
-    ref: master
-    file: "sonarqube/sonarqube.gitlab-ci.yml"
+    ref: rocketor
+    file: "unit-test/js-unit-test.gitlab-ci.yml"
+  - project: "ci/common-ci"
+    ref: rocketor
+    file: "sonarqube/sonarqube.js-unittest.gitlab-ci.yml"  
   - project: "ci/common-ci"
     ref: master
     file: "npm/publish-npm.gitlab-ci.yml"
+
+unit-test-js:
+  artifacts:
+    reports:
+      junit: coverage/*.xml
+      cobertura: coverage/cobertura-coverage.xml

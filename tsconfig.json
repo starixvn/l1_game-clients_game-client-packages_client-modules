@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "outDir": "build/umd/",
-    "target": "ES2018",
+    "outDir": "build/",
+    "target": "ES5",
     "module": "UMD",
     "moduleResolution": "Node",
     "declaration": true,
-    "allowJs": true
+    "allowJs": true,
+    "esModuleInterop": true
   },
-  "include": ["./lib/**/*"]
+  "include": ["src/**/*"]
 }
